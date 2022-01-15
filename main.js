@@ -28,12 +28,44 @@ function simulateMouseEvents(element, eventName) {
     element.dispatchEvent (mouseEvent);
 }
 
-
+// open specific chat
 function selectChat(chatName) {
     var chatTitle= document.querySelector('[title="' + chatName + '"]');
     simulateMouseEvents(chatTitle, 'mousedown')
 
 }
 
-selectChat("שחר סוני")
-sendMessage("אלי גבר מלך")
+
+function getUnreadChats() {
+    var unreadChats = document.querySelectorAll('[aria-label*="unread message"]')
+    var chatMessageAmount = {}
+    for (let chat of unreadChats) {
+        var chatName = chat.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector("[title]").title
+        var unreadMessageAmount = chat.innerText    
+        chatMessageAmount[chatName] = unreadMessageAmount
+    }
+    return chatMessageAmount;    
+}
+
+// this function should run when already openned wanted chat
+function getLastMessages(messageAmount) {
+    messages  = []
+    var messageList =  document.querySelector('[aria-label*="Message list"]')
+    for (let i = 1; i < messageAmount+1; i++) {
+        var message = messageList.children[messageList.children.length-i]
+        var text = message.querySelector('[class*="selectable-text copyable-text"]').innerText
+        messages.push(text)
+        console.log("Message number " + i + ". : " + text)
+      }
+    return messages.reverse()
+}
+
+
+
+function readChat(chatName,messageAmount) {
+    selectChat(chatName);
+    sleep(10)
+    return getLastMessages(messageAmount);
+}
+
+readChat("ססיל ולדילן", 3)
