@@ -7,12 +7,12 @@ function sleep(ms) {
   }
 
 //send a message after already being on a specific chat
-async function sendMessage() {
+async function sendMessage(text) {
     var event = new InputEvent('input', {bubbles: true}); 
     await sleep(10)
 
     var textbox = document.querySelector('[title="Type a message"]');
-    textbox.textContent = "what i want"
+    textbox.textContent = text
 
     textbox.dispatchEvent(event);
 
@@ -28,11 +28,12 @@ function simulateMouseEvents(element, eventName) {
     element.dispatchEvent (mouseEvent);
 }
 
+
 function selectChat(chatName) {
-    var chatTitle= document.querySelector('[title="שחר סוני"]');
+    var chatTitle= document.querySelector('[title="' + chatName + '"]');
     simulateMouseEvents(chatTitle, 'mousedown')
 
 }
 
-selectChat("eli")
-sendMessage()
+selectChat("שחר סוני")
+sendMessage("אלי גבר מלך")
