@@ -53,18 +53,21 @@ function getLastMessages(messageAmount) {
     var messageList =  document.querySelector('[aria-label*="Message list"]')
     for (let i = 1; i < messageAmount+1; i++) {
         var message = messageList.children[messageList.children.length-i]
-        var text = message.querySelector('[class*="selectable-text copyable-text"]').innerText
+        if ( message.querySelector('[class*="selectable-text copyable-text"]') != null ) {
+            var text = message.querySelector('[class*="selectable-text copyable-text"]').innerText
         messages.push(text)
         console.log("Message number " + i + ". : " + text)
+        }
+        
       }
     return messages.reverse()
 }
 
 
 
-function readChat(chatName,messageAmount) {
+async function readChat(chatName,messageAmount) {
     selectChat(chatName);
-    sleep(10)
+    await sleep(10)
     return getLastMessages(messageAmount);
 }
 
