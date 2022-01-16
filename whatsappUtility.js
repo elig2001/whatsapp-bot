@@ -12,22 +12,12 @@ var autoResponses = {
             "name": "ססיל ולדילן",
             "incoming": "אלי",
             "response": "שתוק"
-        },
-        {
-            "name": "ססיל ולדילן",
-            "incoming": "שצ",
-            "response": "האם התכוונת לרשום אני גרוע בדסטיני ויצא לך אני צעיר?"
-        }
-
-    ],
-    "בראב": [
-        {
-            "incoming": "אלי",
-            "response": "שתוק"
         }
     ]
-
 }
+
+var timedMessages = [{ 'time': { 'hours': 13, 'minutes': 25 }, 'chatName': 'קפה ינואר צוות חרמון', 'message': "13:30 -  התנסויות 15 דק  \nצוותי - {'צוותי': 'https://us02web.zoom.us/j/6728767806', 'קורסי': 'https://zoom.us/j/94191737726?pwd=ZWtham5tYzNlQ1B3djgxelpsV0w5Zz09', 'דו קורסי': 'https://us02web.zoom.us/j/88080371820?pwd=S0lmL0VFcDdDWWoySW1TamdvVVRBdz09'} " }, { 'time': { 'hours': 15, 'minutes': 10 }, 'chatName': 'קפה ינואר צוות חרמון', 'message': "15:15 -  סימולציות  \nצוותי - {'צוותי': 'https://us02web.zoom.us/j/6728767806', 'קורסי': 'https://zoom.us/j/94191737726?pwd=ZWtham5tYzNlQ1B3djgxelpsV0w5Zz09', 'דו קורסי': 'https://us02web.zoom.us/j/88080371820?pwd=S0lmL0VFcDdDWWoySW1TamdvVVRBdz09'} " }, { 'time': { 'hours': 16, 'minutes': -5 }, 'chatName': 'קפה ינואר צוות חרמון', 'message': "16:00 -  א׳ ב׳ בהדרכה  \nקורסי - {'צוותי': 'https://us02web.zoom.us/j/6728767806', 'קורסי': 'https://zoom.us/j/94191737726?pwd=ZWtham5tYzNlQ1B3djgxelpsV0w5Zz09', 'דו קורסי': 'https://us02web.zoom.us/j/88080371820?pwd=S0lmL0VFcDdDWWoySW1TamdvVVRBdz09'} " }, { 'time': { 'hours': 16, 'minutes': 30 }, 'chatName': 'קפה ינואר צוות חרמון', 'message': "16:35 -  חניכה ומשוב  \nקורסי - {'צוותי': 'https://us02web.zoom.us/j/6728767806', 'קורסי': 'https://zoom.us/j/94191737726?pwd=ZWtham5tYzNlQ1B3djgxelpsV0w5Zz09', 'דו קורסי': 'https://us02web.zoom.us/j/88080371820?pwd=S0lmL0VFcDdDWWoySW1TamdvVVRBdz09'} " }]
+
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -62,7 +52,8 @@ function selectChat(chatName) {
 
 }
 
-
+// returns json that looks like this:
+// {"chat name" : amount of unread messages}
 function getUnreadChats() {
     var unreadChats = document.querySelectorAll('[aria-label*="unread message"]')
     var chatMessageAmount = {}
@@ -87,10 +78,8 @@ function getLastMessages(messageAmount) {
         }
 
     }
-    console.log(messages.reverse())
     return messages.reverse()
 }
-
 
 async function readChat(chatName, messageAmount) {
     selectChat(chatName);
@@ -114,24 +103,54 @@ async function runGenericBotLogic(autoResponses, chatName, unreadMessageAmount) 
     }
 }
 
+function isCurrentTime(date) {
+    var currentTime = new Date();
+    return (currentTime.getHours() == date.hours && currentTime.getMinutes() == date.minutes)
+}
+
+async function sendTimedMessages() {
+    for (let message of timedMessages) {
+        if (isCurrentTime(message.time)) {
+            await sendMessageToChat(message.chatName, message.message)
+            await sleep(10)
+        }
+    }
+}
+
 async function main() {
     unreadChats = getUnreadChats()
     if (JSON.stringify(unreadChats) == JSON.stringify(lastUnread)) {
         return;
     }
-
     for (let chatName of Object.keys(unreadChats)) {
         if (Object.keys(autoResponses).includes(chatName)) {
-            await runGenericBotLogic(autoResponses["בראב"], chatName, unreadChats[chatName])
+            await runGenericBotLogic(autoResponses[chatName], chatName, unreadChats[chatName])
         }
     }
-
     lastUnread = unreadChats;
-    selectChat("שחר סוני");
 }
 
 
+
 setInterval(async () => {
-    await main()
+    try {
+        var currentChat = document.querySelector('[title="Profile Details"]').parentElement.children[1].querySelector('[title]').title
+        await main()
+        selectChat(currentChat);
+    } catch (e) {
+        await main()
+    }
 }, 500);
+
+
+setInterval(async () => {
+    try {
+        var currentChat = document.querySelector('[title="Profile Details"]').parentElement.children[1].querySelector('[title]').title
+        await sendTimedMessages()
+        selectChat(currentChat);
+    } catch (e) {
+        await sendTimedMessages()
+    }
+}, 60000);
+
 
