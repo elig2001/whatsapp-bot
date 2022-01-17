@@ -185,12 +185,22 @@ async function main() {
 
 
 setInterval(async () => {
+    var currentChat = null
     try {
-        var currentChat = document.querySelector('[title="Profile Details"]').parentElement.children[1].querySelector('[title]').title
-        await main()
-        selectChat(currentChat);
+        currentChat = document.querySelector('[title="Profile Details"]').parentElement.children[1].querySelector('[title]').title
     } catch (e) {
+        console.log("Couldn't find the current chat", e)
+    }
+    try {
         await main()
+    } finally {
+        if (currentChat) {
+            try {
+                selectChat(currentChat);
+            } catch (e) {
+                console.log("Couldn't select the previous chat", e)
+            }
+        }
     }
 }, 500);
 
