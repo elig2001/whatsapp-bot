@@ -44,6 +44,7 @@ def parse_time(time):
     minutes = int(time[3:])
     if minutes - 5 < 0:
         minutes = minutes + HOUR
+        hours -= 1
     
     minutes = minutes - PREP_TIME
     return hours, minutes
