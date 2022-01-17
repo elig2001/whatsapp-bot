@@ -137,14 +137,18 @@ async function sendMessageToChat(chatName, message) {
 
 async function runGenericBotLogic(chatName, unreadMessageAmount) {
     for (let message of await readChat(chatName, unreadMessageAmount)) {
-        for (let response of autoResponses[chatName]) {
-            if (message.localeCompare(response.incoming) == 0) {
-                await sendMessageToChat(chatName, response.response)
+        if (chatName in autoResponses) {
+            for (let response of autoResponses[chatName]) {
+                if (message.localeCompare(response.incoming) == 0) {
+                    await sendMessageToChat(chatName, response.response)
+                }
             }
         }
-        for (let [command, responseFunction] of Object.entries(commands[chatName])) {
-            if (message.match(command)) {
-                await responseFunction(chatName, message)
+        if (chatName in commands) {
+            for (let [command, responseFunction] of Object.entries(commands[chatName])) {
+                if (message.match(command)) {
+                    await responseFunction(chatName, message)
+                }
             }
         }
     }
