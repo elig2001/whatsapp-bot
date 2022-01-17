@@ -23,7 +23,8 @@ var commands = {
     }
 }
 
-var timedMessages = [{'time': {'hours': 8, 'minutes': 40}, 'chatName': 'קפה ינואר צוות חרמון', 'message': '08:45 -  התנסות חינוך מל״מ  \nדו קורסי - https://us02web.zoom.us/j/88080371820?pwd=S0lmL0VFcDdDWWoySW1TamdvVVRBdz09 '}, {'time': {'hours': 10, 'minutes': 55}, 'chatName': 'קפה ינואר צוות חרמון', 'message': '10:00 -  האדם יקר  \nקורסי - https://zoom.us/j/94191737726?pwd=ZWtham5tYzNlQ1B3djgxelpsV0w5Zz09 '}, {'time': {'hours': 11, 'minutes': 10}, 'chatName': 'קפה ינואר צוות חרמון', 'message': '11:15 -  שיחת קב״ן \nקורסי - https://zoom.us/j/94191737726?pwd=ZWtham5tYzNlQ1B3djgxelpsV0w5Zz09 '}, {'time': {'hours': 13, 'minutes': 25}, 'chatName': 'קפה ינואר צוות חרמון', 'message': '13:30 -  התנסויות 15 דק \nצוותי - https://us02web.zoom.us/j/6728767806 '}, {'time': {'hours': 15, 'minutes': 10}, 'chatName': 'קפה ינואר צוות חרמון', 'message': '15:15 -  התנסויות 15 דק \nצוותי - https://us02web.zoom.us/j/6728767806 '}, {'time': {'hours': 17, 'minutes': 55}, 'chatName': 'קפה ינואר צוות חרמון', 'message': '17:00 -  סימולציה קורסית- חניך אובדני  \nקורסי - https://zoom.us/j/94191737726?pwd=ZWtham5tYzNlQ1B3djgxelpsV0w5Zz09 '}]
+var timedMessages = [{'time': {'hours': 13, 'minutes': 25}, 'chatName': 'קפה ינואר צוות חרמון', 'message': '13:30 -  סימולציה קורסית - חניך אובדני  \nקורסי - https://zoom.us/j/94191737726?pwd=ZWtham5tYzNlQ1B3djgxelpsV0w5Zz09 '}, {'time': {'hours': 14, 'minutes': 40}, 'chatName': 'קפה ינואר צוות חרמון', 'message': '14:45 -  התנסויות 15 דק \nצוותי - https://us02web.zoom.us/j/6728767806 '}, {'time': {'hours': 16, 'minutes': 25}, 'chatName': 'קפה ינואר צוות חרמון', 'message': '16:30 -  התנסויות 15 דק \nצוותי - https://us02web.zoom.us/j/6728767806 '}]
+
 
 
 const ALL_MEMBERS = {
