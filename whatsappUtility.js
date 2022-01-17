@@ -15,11 +15,49 @@ var autoResponses = {
         }
     ]
 }
+var commands = {
+    "קפה ינואר צוות חרמון": {
+        "^!מספרי ברזל$": resetAttendance,
+        "^!\\d+$": markAsPresent,
+        "^!מי חסר$": sendMissingMembers,
+    }
+}
 
 var timedMessages = [{'time': {'hours': 8, 'minutes': 40}, 'chatName': 'קפה ינואר צוות חרמון', 'message': '08:45 -  התנסות חינוך מל״מ  \nדו קורסי - https://us02web.zoom.us/j/88080371820?pwd=S0lmL0VFcDdDWWoySW1TamdvVVRBdz09 '}, {'time': {'hours': 10, 'minutes': 55}, 'chatName': 'קפה ינואר צוות חרמון', 'message': '10:00 -  האדם יקר  \nקורסי - https://zoom.us/j/94191737726?pwd=ZWtham5tYzNlQ1B3djgxelpsV0w5Zz09 '}, {'time': {'hours': 11, 'minutes': 10}, 'chatName': 'קפה ינואר צוות חרמון', 'message': '11:15 -  שיחת קב״ן \nקורסי - https://zoom.us/j/94191737726?pwd=ZWtham5tYzNlQ1B3djgxelpsV0w5Zz09 '}, {'time': {'hours': 13, 'minutes': 25}, 'chatName': 'קפה ינואר צוות חרמון', 'message': '13:30 -  התנסויות 15 דק \nצוותי - https://us02web.zoom.us/j/6728767806 '}, {'time': {'hours': 15, 'minutes': 10}, 'chatName': 'קפה ינואר צוות חרמון', 'message': '15:15 -  התנסויות 15 דק \nצוותי - https://us02web.zoom.us/j/6728767806 '}, {'time': {'hours': 17, 'minutes': 55}, 'chatName': 'קפה ינואר צוות חרמון', 'message': '17:00 -  סימולציה קורסית- חניך אובדני  \nקורסי - https://zoom.us/j/94191737726?pwd=ZWtham5tYzNlQ1B3djgxelpsV0w5Zz09 '}]
 
 
+const ALL_MEMBERS = {
+    1: "אלי",
+    2: "גל",
+    3: "דניאל",
+    4: "נמרוד",
+    5: "אופיר",
+    6: "גבי",
+    7: "עדי",
+    8: "זואי",
+    9: "ספיר",
+    10: "ירין",
+    11: "תובל",
+    12: "נעה",
+}
 
+var missingMembers = {...ALL_MEMBERS}
+
+
+async function resetAttendance(chatName, incomingMessage) {
+    missingMembers = {...ALL_MEMBERS}
+}
+
+async function markAsPresent(chatName, incomingMessage) {
+    delete missingMembers[incomingMessage.replace("!", "")]
+    if (!Object.keys(missingMembers).length) {
+        await sendMessageToChat(chatName, "כולם כאן :)")
+    }
+}
+
+async function sendMissingMembers(chatName, incomingMessage) {
+    await sendMessageToChat(chatName, Object.values(missingMembers).join(", "))
+}
 
 
 function sleep(ms) {
@@ -96,11 +134,16 @@ async function sendMessageToChat(chatName, message) {
     await sendMessage(message)
 }
 
-async function runGenericBotLogic(autoResponses, chatName, unreadMessageAmount) {
-    for (let response of autoResponses) {
-        for (let message of await readChat(chatName, unreadMessageAmount)) {
+async function runGenericBotLogic(chatName, unreadMessageAmount) {
+    for (let message of await readChat(chatName, unreadMessageAmount)) {
+        for (let response of autoResponses[chatName]) {
             if (message.localeCompare(response.incoming) == 0) {
                 await sendMessageToChat(chatName, response.response)
+            }
+        }
+        for (let [command, responseFunction] of Object.entries(commands[chatName])) {
+            if (message.match(command)) {
+                await responseFunction(chatName, message)
             }
         }
     }
@@ -128,8 +171,8 @@ async function main() {
         return;
     }
     for (let chatName of Object.keys(unreadChats)) {
-        if (Object.keys(autoResponses).includes(chatName)) {
-            await runGenericBotLogic(autoResponses[chatName], chatName, unreadChats[chatName])
+        if (chatName in autoResponses or chatName in commands) {
+            await runGenericBotLogic(chatName, unreadChats[chatName])
         }
     }
     lastUnread = unreadChats;
