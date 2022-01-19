@@ -13,6 +13,29 @@ var autoResponses = {
             "incoming": "אלי",
             "response": "שתוק"
         }
+    ],
+    "קפה ינואר צוות חרמון": [{
+        "incoming": "לוז",
+        "response": `
+        לוז יום רביעי 19.1
+    8:30-8:45- זמן אקטואליה (שיעור קורסי)
+    8:45-10:15 - קפ״ה דילמה (דו קורסי, מעבר בין הצוותים בחצי הקורס-נסביר גם בתום זמן האקטואליה)
+    10:15-10:30- הפסקה
+    10:30-11:15- הבחירה בחיים (שיעור קורסי)
+    11:15-12:15 - שיחת יוהל״מ (שיעור קורסי)
+    12:15-13:30- הפסקת צהריים
+    13:30-14:00-  טכנולוגיות למידה (שיעור קורסי)
+    * 14:00-14:20* - הפסקה
+    14:20-14:30 - התארגנות לקראת שיעור מפקד המערך 
+    14:30-15:30- שיעור מפקד מערך ההדרכה (שיעור קורסי)
+    15:30-15:45- הפסקה
+    15:45-17:00 - סימולציות (שיעור צוותי)
+    17:00-17:15- התארגנות לא״ג
+    17:15-18:00 - א״ג (שיעור קורסי)
+    18:00 עיבוד יום`
+    }
+
+
     ]
 }
 var commands = {
@@ -23,7 +46,16 @@ var commands = {
     }
 }
 
-var timedMessages = [{'time': {'hours': 13, 'minutes': 25}, 'chatName': 'קפה ינואר צוות חרמון', 'message': '13:30 -  סימולציה קורסית - חניך אובדני  \nקורסי - https://zoom.us/j/94191737726?pwd=ZWtham5tYzNlQ1B3djgxelpsV0w5Zz09 '}, {'time': {'hours': 14, 'minutes': 40}, 'chatName': 'קפה ינואר צוות חרמון', 'message': '14:45 -  התנסויות 15 דק \nצוותי - https://us02web.zoom.us/j/6728767806 '}, {'time': {'hours': 16, 'minutes': 25}, 'chatName': 'קפה ינואר צוות חרמון', 'message': '16:30 -  התנסויות 15 דק \nצוותי - https://us02web.zoom.us/j/6728767806 '}]
+var timedMessages = [{ 'time': { 'hours': 8, 'minutes': 25 }, 'chatName': 'קפה ינואר צוות חרמון', 'message': 'לאון רען הדרכה מוסר: \n 08:30 - 08:45 - זמן אקטואליה  \nקורסי - https://zoom.us/j/94191737726?pwd=ZWtham5tYzNlQ1B3djgxelpsV0w5Zz09 ' }, { 'time': { 'hours': 8, 'minutes': 40 }, 'chatName': 'קפה ינואר צוות חרמון', 'message': 'רב הדרכה > רב טוראי מוסר: \n 08:45 - 10:15  - קפ״ה דילמה  \nדו קורסי - https://us02web.zoom.us/j/88080371820?pwd=S0lmL0VFcDdDWWoySW1TamdvVVRBdz09 ' }, { 'time': { 'hours': 10, 'minutes': 25 }, 'chatName': 'קפה ינואר צוות חרמון', 'message': 'רב הדרכה > רב טוראי מוסר: \n 10:30 - 11:15 - הבחירה בחיים  \nדו קורסי - https://us02web.zoom.us/j/88080371820?pwd=S0lmL0VFcDdDWWoySW1TamdvVVRBdz09 ' }, { 'time': { 'hours': 11, 'minutes': 10 }, 'chatName': 'קפה ינואר צוות חרמון', 'message': 'לאון רען הדרכה מוסר: \n 11:15 - 12:15  - שיחת יוהל״מ  \nקורסי - https://zoom.us/j/94191737726?pwd=ZWtham5tYzNlQ1B3djgxelpsV0w5Zz09 ' }, { 'time': { 'hours': 13, 'minutes': 25 }, 'chatName': 'קפה ינואר צוות חרמון', 'message': 'עדיאל מוסר: \n 13:30 - 14:00 -  טכנולוגיות למידה  \nקורסי - https://zoom.us/j/94191737726?pwd=ZWtham5tYzNlQ1B3djgxelpsV0w5Zz09 ' }, { 'time': { 'hours': 14, 'minutes': 25 }, 'chatName': 'קפה ינואר צוות חרמון', 'message': 'להיות ממצ זה קאדר? תחשוב מה זה להיות הבוט שלו בוואצאפ... מוסר: \n 14:30 - 15:30 - שיעור מפקד מערך ההדרכה  \nקורסי - https://zoom.us/j/94191737726?pwd=ZWtham5tYzNlQ1B3djgxelpsV0w5Zz09 ' }, { 'time': { 'hours': 15, 'minutes': 40 }, 'chatName': 'קפה ינואר צוות חרמון', 'message': 'מלי מוסרת: \n 15:45 - 17:00  - סימולציות  \nצוותי - https://us02web.zoom.us/j/6728767806 ' }, { 'time': { 'hours': 17, 'minutes': 10 }, 'chatName': 'קפה ינואר צוות חרמון', 'message': 'רב הדרכה > רב טוראי מוסר: \n 17:15 - 18:00  - א״ג  \nקורסי - https://zoom.us/j/94191737726?pwd=ZWtham5tYzNlQ1B3djgxelpsV0w5Zz09 ' }, { 'time': { 'hours': 7, 'minutes': 55 }, 'chatName': 'קפה ינואר צוות חרמון', 'message': 'נו באמת מי עדיין לא מילא דוח 1 ??? אנחנו כבר בחודש 7 של הקורס ואתם עדיין שוכחים...' }]
+
+var timedActions = [{'time': {'hours': 8, 'minutes': 25}, 'action_name': 'declareCounting', 'chatName': 'קפה ינואר צוות חרמון', 'message': 'ספירת מספרי הברזל החלה!'}, {'time': {'hours': 8, 'minutes': 40}, 'action_name': 'declareCounting', 'chatName': 'קפה ינואר צוות חרמון', 'message': 'ספירת מספרי הברזל החלה!'}, {'time': {'hours': 10, 'minutes': 25}, 'action_name': 'declareCounting', 'chatName': 'קפה ינואר צוות חרמון', 'message': 'ספירת מספרי הברזל החלה!'}, {'time': {'hours': 11, 'minutes': 10}, 'action_name': 'declareCounting', 'chatName': 'קפה ינואר צוות חרמון', 'message': 'ספירת מספרי הברזל החלה!'}, {'time': {'hours': 13, 'minutes': 25}, 'action_name': 'declareCounting', 'chatName': 'קפה ינואר צוות חרמון', 'message': 'ספירת מספרי הברזל החלה!'}, {'time': {'hours': 14, 'minutes': 25}, 'action_name': 'declareCounting', 'chatName': 'קפה ינואר צוות חרמון', 'message': 'ספירת מספרי הברזל החלה!'}, {'time': {'hours': 15, 'minutes': 40}, 'action_name': 'declareCounting', 'chatName': 'קפה ינואר צוות חרמון', 'message': 'ספירת מספרי הברזל החלה!'}, {'time': {'hours': 17, 'minutes': 10}, 'action_name': 'declareCounting', 'chatName': 'קפה ינואר צוות חרמון', 'message': 'ספירת מספרי הברזל החלה!'}]
+
+var actions = {
+    "declareCounting": declareCounting
+}
+
+var everyonesHere = ["אחרי מאמצים כבירים צוות חרמון זוכה בפרס - כל צוות חרמון פה תשלח את זה כבר בזום", "כולם כאן, מטורפים! הנה 400 אסימונים תתחלקו", "וואו כולם התחברו כל כך מהר בזום, אתם ממש חדים לאון היה גאה בכם"]
+
 
 
 
@@ -42,17 +74,17 @@ const ALL_MEMBERS = {
     12: "נעה",
 }
 
-var missingMembers = {...ALL_MEMBERS}
+var missingMembers = { ...ALL_MEMBERS }
 
 
 async function resetAttendance(chatName, incomingMessage) {
-    missingMembers = {...ALL_MEMBERS}
+    missingMembers = { ...ALL_MEMBERS }
 }
 
 async function markAsPresent(chatName, incomingMessage) {
     delete missingMembers[incomingMessage.replace("!", "")]
     if (!Object.keys(missingMembers).length) {
-        await sendMessageToChat(chatName, "כולם כאן :)")
+        await sendMessageToChat(chatName, everyonesHere[Math.floor(Math.random() * everyonesHere.length)])
     }
 }
 
@@ -60,6 +92,10 @@ async function sendMissingMembers(chatName, incomingMessage) {
     await sendMessageToChat(chatName, Object.values(missingMembers).join(", "))
 }
 
+async function declareCounting(chatName, incomingMessage) {
+    await resetAttendance(chatName, incomingMessage);
+    await sendMessageToChat(chatName, incomingMessage);
+}
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -139,6 +175,7 @@ async function runGenericBotLogic(chatName, unreadMessageAmount) {
     for (let message of await readChat(chatName, unreadMessageAmount)) {
         if (chatName in autoResponses) {
             for (let response of autoResponses[chatName]) {
+                console.log(message + " == " + response.incoming + " ? " + message.localeCompare(response.incoming) == 0)
                 if (message.localeCompare(response.incoming) == 0) {
                     await sendMessageToChat(chatName, response.response)
                 }
@@ -156,17 +193,23 @@ async function runGenericBotLogic(chatName, unreadMessageAmount) {
 
 function isCurrentTime(date) {
     var currentTime = new Date();
-    console.log("comparing " +currentTime.getHours()+ " == " + date.hours+  " && " + currentTime.getMinutes() + "==" + date.minutes)
+    console.log("comparing " + currentTime.getHours() + " == " + date.hours + " && " + currentTime.getMinutes() + "==" + date.minutes)
     return (currentTime.getHours() == date.hours && currentTime.getMinutes() == date.minutes)
 }
 
 async function sendTimedMessages() {
     for (let message of timedMessages) {
-        console.log("checking if current time: " + message.time)
         if (isCurrentTime(message.time)) {
             await sendMessageToChat(message.chatName, message.message)
             await sleep(10)
         }
+    }
+    for (let action of timedActions) {
+        if (isCurrentTime(action.time)) {
+            await actions[action.action_name](action.chatName, action.message)
+            await sleep(10)
+        }
+
     }
 }
 
@@ -176,7 +219,7 @@ async function main() {
         return;
     }
     for (let chatName of Object.keys(unreadChats)) {
-        if (chatName in autoResponses or chatName in commands) {
+        if (chatName in autoResponses || chatName in commands) {
             await runGenericBotLogic(chatName, unreadChats[chatName])
         }
     }
